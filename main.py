@@ -1,5 +1,6 @@
 import flask
 import random
+import string
 from flask import Flask
 
 app = Flask(__name__)
@@ -19,9 +20,15 @@ def facts():
 
 @app.route("/pw_generate")
 def password():
-    
+    characters = string.ascii_letters + string.digits + string.punctuation
+    generated_password = ''.join(random.choice(characters) for i in range(12))
 
+    return f'<h1>Password Generator</h1><p>Password kamu: <b>{generated_password}</b></p>'
+    
 @app.route("/coin_flip")
 def coin():
+    result = random.choice(["Heads", "Tails"])
+
+    return f'<h1>Coin Flip 🪙</h1><p>Hasil: <b>{result}</b></p>'
 
 app.run(debug=True)
